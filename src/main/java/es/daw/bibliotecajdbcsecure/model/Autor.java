@@ -1,6 +1,7 @@
 package es.daw.bibliotecajdbcsecure.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
  * Las validaciones del formulario están en AutorDto.
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Autor {

@@ -28,7 +28,13 @@ public class LibroMapper {
      * LibroService se encarga de completarlo.
      */
     public Libro toModelEntity(LibroDto dto) {
-        Autor autor = new Autor(dto.getAutorId(), null);
-        return new Libro(null, dto.getIsbn(), dto.getTitulo(), autor, dto.getFechaPublicacion());
+        Autor autor = Autor.builder().id(dto.getAutorId()).build();
+        return Libro.builder()
+                .id(null)
+                .isbn(dto.getIsbn())
+                .titulo(dto.getTitulo())
+                .autor(autor)
+                .fechaPublicacion(dto.getFechaPublicacion())
+                .build();
     }
 }

@@ -96,6 +96,6 @@ public class AutorRepositoryJdbc implements AutorRepository {
     }
 
     private Autor mapRow(ResultSet rs) throws SQLException {
-        return new Autor(rs.getInt("id"), rs.getString("nombre"));
+        return Autor.builder().id(rs.getInt("id")).nombre(rs.getString("nombre")).build();
     }
 }
