@@ -13,6 +13,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // AUTORIZACIÓN: qué rutas son públicas
                 .authorizeHttpRequests(auth -> auth
                         // Públicas: portada, página de error y recursos estáticos
                         .requestMatchers("/", "/error", "/css/**", "/vendor/**").permitAll()
@@ -27,7 +28,21 @@ public class SecurityConfig {
                         .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "USER")
                         // Cualquier otra cosa: al menos estar identificado
                         .anyRequest().authenticated()
-                );
+                )
+                // AUTENTICACIÓN: formulario de login propio
+                .formLogin(form -> form
+                        .loginPage("/login")              // GET /login: nuestra vista
+                        .defaultSuccessUrl("/libros")     // a dónde ir tras entrar
+                        .permitAll()
+                )
+                // LOGOUT: POST /logout (con token CSRF)
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                )
+                // La consola H2 no envía token CSRF y se muestra dentro de un <iframe>
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
     }
