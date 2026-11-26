@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/layout :: head('Autores')}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
@@ -8,7 +8,7 @@
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="titulo-seccion">✍️ Autores</h2>
-    <a th:href="@{/autores/nuevo}" class="btn btn-success">
+    <a sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')" th:href="@{/autores/nuevo}" class="btn btn-success">
       <i class="bi bi-plus-lg"></i> Añadir autor
     </a>
   </div>
@@ -19,8 +19,8 @@
     <thead class="table-dark">
     <tr>
       <th>Nombre</th>
-      <th class="col-accion">Editar</th>
-      <th class="col-accion">Borrar</th>
+      <th sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')" class="col-accion">Editar</th>
+      <th sec:authorize="hasRole('ADMIN')" class="col-accion">Borrar</th>
     </tr>
     </thead>
     <tbody>
@@ -29,13 +29,13 @@
     </tr>
     <tr th:each="a : ${autores}">
       <td th:text="${a.nombre}">Nombre</td>
-      <td>
+      <td sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')">
         <a th:href="@{/autores/editar/{id}(id=${a.id})}"
            class="btn btn-warning btn-sm" title="Editar">
           <i class="bi bi-pencil"></i>
         </a>
       </td>
-      <td>
+      <td sec:authorize="hasRole('ADMIN')">
         <form th:action="@{/autores/borrar/{id}(id=${a.id})}" method="post"
               onsubmit="return confirm('Se borrarán también todos sus libros. ¿Continuar?');">
           <button type="submit" class="btn btn-danger btn-sm" title="Borrar">

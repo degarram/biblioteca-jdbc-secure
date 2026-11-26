@@ -25,6 +25,10 @@ public class UsuarioRepositoryMemoria implements UsuarioRepository {
             Usuario.builder()
                     .id(3).username("luis").rol("USER").activo(false)
                     .password("$2a$10$EQIZl.C1bGRS.QitQ.2aPuM62n.iRSiiLBqTCIUwFC21c9U9FPdyK")
+                    .build(),
+            Usuario.builder()
+                    .id(4).username("marta").rol("BIBLIOTECARIO").activo(true)
+                    .password("$2a$10$85QdZV8581S9Fas3shFBCOeqHU4ppDoclIVlptWsICELr/Pq4Oz6q")
                     .build()
     );
 

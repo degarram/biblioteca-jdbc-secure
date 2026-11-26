@@ -19,13 +19,14 @@ public class SecurityConfig {
                         .requestMatchers("/", "/error", "/css/**", "/vendor/**").permitAll()
                         // Consola H2: solo para desarrollo
                         .requestMatchers("/h2-console/**").permitAll()
-                        // Solo ADMIN: altas, ediciones y borrados
+                        // Solo ADMIN: borrados
+                        .requestMatchers("/libros/borrar/**", "/autores/borrar/**").hasRole("ADMIN")
+                        // ADMIN y BIBLIOTECARIO: crear y editar
                         .requestMatchers("/libros/nuevo", "/libros/editar/**",
-                                "/libros/guardar", "/libros/borrar/**").hasRole("ADMIN")
-                        .requestMatchers("/autores/nuevo", "/autores/editar/**",
-                                "/autores/guardar", "/autores/borrar/**").hasRole("ADMIN")
-                        // ADMIN y USER: consultar y filtrar
-                        .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "USER")
+                                "/libros/guardar","/autores/nuevo", "/autores/editar/**",
+                                "/autores/guardar").hasAnyRole("ADMIN", "BIBLIOTECARIO")
+                        // ADMIN y BIBLIOTECARIO y USER: consultar y filtrar
+                        .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "BIBLIOTECARIO", "USER")
                         // Cualquier otra cosa: al menos estar identificado
                         .anyRequest().authenticated()
                 )
