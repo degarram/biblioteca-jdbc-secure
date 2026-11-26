@@ -16,6 +16,9 @@ public class AutorMapper {
     }
 
     public Autor toModelEntity(AutorDto dto) {
-        return new Autor(dto.getId(), dto.getNombre());
+        return Autor.builder()
+                .id(dto.getId())
+                .nombre(dto.getNombre())
+                .build();
     }
 }

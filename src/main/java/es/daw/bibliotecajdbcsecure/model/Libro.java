@@ -1,6 +1,7 @@
 package es.daw.bibliotecajdbcsecure.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import java.time.LocalDate;
  *   que es el equivalente en Java al tipo DATE de la base de datos.
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Libro {

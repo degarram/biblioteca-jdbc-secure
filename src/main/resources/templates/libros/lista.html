@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/layout :: head('Libros')}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
@@ -8,7 +8,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="titulo-seccion">📚 Libros</h2>
-        <a th:href="@{/libros/nuevo}" class="btn btn-success">
+        <a sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')" th:href="@{/libros/nuevo}" class="btn btn-success">
             <i class="bi bi-plus-lg"></i> Añadir libro
         </a>
     </div>
@@ -68,8 +68,8 @@
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Publicación</th>
-                    <th class="col-accion">Editar</th>
-                    <th class="col-accion">Borrar</th>
+                    <th sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')" class="col-accion">Editar</th>
+                    <th sec:authorize="hasRole('ADMIN')" class="col-accion">Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -78,13 +78,13 @@
                     <td th:text="${l.titulo}">Título</td>
                     <td th:text="${l.autorNombre}">Autor</td>
                     <td th:text="${#temporals.format(l.fechaPublicacion, 'dd/MM/yyyy')}">01/01/2000</td>
-                    <td>
+                    <td sec:authorize="hasAnyRole('ADMIN', 'BIBLIOTECARIO')">
                         <a th:href="@{/libros/editar/{isbn}(isbn=${l.isbn})}"
                            class="btn btn-warning btn-sm" title="Editar">
                             <i class="bi bi-pencil"></i>
                         </a>
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <form th:action="@{/libros/borrar/{isbn}(isbn=${l.isbn})}" method="post"
                               onsubmit="return confirm('¿Seguro que quieres borrar este libro?');">
                             <button type="submit" class="btn btn-danger btn-sm" title="Borrar">
