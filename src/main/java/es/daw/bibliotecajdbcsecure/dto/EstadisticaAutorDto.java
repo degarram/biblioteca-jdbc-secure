@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** Fila del informe de estadísticas: resultado de una consulta, no una entidad. */
+/**
+ * Fila del informe de estadísticas: resultado de una consulta, no una entidad.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

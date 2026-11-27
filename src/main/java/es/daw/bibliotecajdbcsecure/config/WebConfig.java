@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/** Vistas sin lógica: la portada no necesita controlador. */
+/**
+ * Vistas sin lógica: la portada no necesita controlador.
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

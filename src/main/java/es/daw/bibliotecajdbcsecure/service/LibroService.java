@@ -19,9 +19,10 @@ public class LibroService {
     private final AutorRepository autorRepository;
 
 
-
     /** Todos los filtros son opcionales. */
-    /** Todos los filtros son opcionales: si llega null, ese filtro no se aplica. */
+    /**
+     * Todos los filtros son opcionales: si llega null, ese filtro no se aplica.
+     */
     public List<Libro> buscar(Integer autorId, Integer anioDesde, Integer anioHasta) {
         return libroRepository.findAll().stream()
                 .filter(l -> autorId == null || l.getAutor().getId().equals(autorId))

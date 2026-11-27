@@ -6,29 +6,29 @@
 
 <div class="container" style="max-width: 640px;">
 
-  <h2 class="titulo-seccion mb-4"
-      th:text="${autorDto.id == null} ? 'Nuevo autor' : 'Editar autor'">
-    Autor
-  </h2>
+    <h2 class="titulo-seccion mb-4"
+        th:text="${autorDto.id == null} ? 'Nuevo autor' : 'Editar autor'">
+        Autor
+    </h2>
 
-  <form th:action="@{/autores/guardar}" th:object="${autorDto}" method="post"
-        class="card card-body shadow-sm" novalidate>
+    <form class="card card-body shadow-sm" method="post" novalidate
+          th:action="@{/autores/guardar}" th:object="${autorDto}">
 
-    <!-- El id viaja oculto: vacío en alta, relleno en edición -->
-    <input type="hidden" th:field="*{id}">
+        <!-- El id viaja oculto: vacío en alta, relleno en edición -->
+        <input th:field="*{id}" type="hidden">
 
-    <div class="mb-4">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input type="text" th:field="*{nombre}" class="form-control"
-             th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'">
-      <div class="invalid-feedback" th:errors="*{nombre}">Error</div>
-    </div>
+        <div class="mb-4">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-control" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid'" th:field="*{nombre}"
+                   type="text">
+            <div class="invalid-feedback" th:errors="*{nombre}">Error</div>
+        </div>
 
-    <div class="d-flex gap-2">
-      <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
-      <a th:href="@{/autores}" class="btn btn-outline-secondary">Cancelar</a>
-    </div>
-  </form>
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Guardar</button>
+            <a class="btn btn-outline-secondary" th:href="@{/autores}">Cancelar</a>
+        </div>
+    </form>
 </div>
 
 <th:block th:replace="~{fragments/layout :: scripts}"></th:block>

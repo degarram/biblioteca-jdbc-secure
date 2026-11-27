@@ -23,7 +23,7 @@ public class SecurityConfig {
                         .requestMatchers("/libros/borrar/**", "/autores/borrar/**").hasRole("ADMIN")
                         // ADMIN y BIBLIOTECARIO: crear y editar
                         .requestMatchers("/libros/nuevo", "/libros/editar/**",
-                                "/libros/guardar","/autores/nuevo", "/autores/editar/**",
+                                "/libros/guardar", "/autores/nuevo", "/autores/editar/**",
                                 "/autores/guardar").hasAnyRole("ADMIN", "BIBLIOTECARIO")
                         // ADMIN y BIBLIOTECARIO y USER: consultar y filtrar
                         .requestMatchers("/libros", "/autores").hasAnyRole("ADMIN", "BIBLIOTECARIO", "USER")

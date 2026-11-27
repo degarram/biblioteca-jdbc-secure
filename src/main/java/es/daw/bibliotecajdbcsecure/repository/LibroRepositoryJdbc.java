@@ -100,7 +100,9 @@ public class LibroRepositoryJdbc implements LibroRepository {
         }
     }
 
-    /** El ISBN no se modifica: no aparece en el SET. */
+    /**
+     * El ISBN no se modifica: no aparece en el SET.
+     */
     @Override
     public void update(Libro libro) {
         String sql = """

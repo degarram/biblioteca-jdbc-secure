@@ -1,6 +1,8 @@
 package es.daw.bibliotecajdbcsecure.exception;
 
-/** Regla de negocio: no puede haber dos libros con el mismo ISBN. */
+/**
+ * Regla de negocio: no puede haber dos libros con el mismo ISBN.
+ */
 public class IsbnDuplicadoException extends RuntimeException {
 
     public IsbnDuplicadoException(String isbn) {

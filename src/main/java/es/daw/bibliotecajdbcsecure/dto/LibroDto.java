@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 /**
  * Datos del libro entre la vista y el controlador.
- *
+ * <p>
  * - No lleva id: el id del libro no se publica nunca.
  * - edicion: false = alta, true = edición. Viaja oculto en el formulario.
  * - autorId: lo que envía el select.

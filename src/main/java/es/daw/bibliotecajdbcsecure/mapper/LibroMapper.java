@@ -5,11 +5,15 @@ import es.daw.bibliotecajdbcsecure.model.Autor;
 import es.daw.bibliotecajdbcsecure.model.Libro;
 import org.springframework.stereotype.Component;
 
-/** Convierte entre LibroDto y Libro. Solo convierte: no usa servicios ni repositorios. */
+/**
+ * Convierte entre LibroDto y Libro. Solo convierte: no usa servicios ni repositorios.
+ */
 @Component
 public class LibroMapper {
 
-    /** Un libro que viene de la BD ya existe: si se abre su formulario, es una edición. */
+    /**
+     * Un libro que viene de la BD ya existe: si se abre su formulario, es una edición.
+     */
     public LibroDto toDto(Libro libro) {
         LibroDto dto = new LibroDto();
         dto.setIsbn(libro.getIsbn());

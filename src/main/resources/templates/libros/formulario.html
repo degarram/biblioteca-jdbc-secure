@@ -6,57 +6,58 @@
 
 <div class="container" style="max-width: 640px;">
 
-  <h2 class="titulo-seccion mb-4"
-      th:text="${libroDto.edicion} ? 'Editar libro' : 'Nuevo libro'">
-    Libro
-  </h2>
+    <h2 class="titulo-seccion mb-4"
+        th:text="${libroDto.edicion} ? 'Editar libro' : 'Nuevo libro'">
+        Libro
+    </h2>
 
-  <form th:action="@{/libros/guardar}" th:object="${libroDto}" method="post"
-        class="card card-body shadow-sm" novalidate>
+    <form class="card card-body shadow-sm" method="post" novalidate
+          th:action="@{/libros/guardar}" th:object="${libroDto}">
 
-    <!-- false = alta, true = edición -->
-    <input type="hidden" th:field="*{edicion}">
+        <!-- false = alta, true = edición -->
+        <input th:field="*{edicion}" type="hidden">
 
-    <div class="mb-3">
-      <label for="isbn" class="form-label">ISBN</label>
-      <!-- readonly y no disabled: un campo disabled no se envía -->
-      <input type="text" th:field="*{isbn}" th:readonly="*{edicion}" class="form-control"
-             th:classappend="${#fields.hasErrors('isbn')} ? 'is-invalid'">
-      <div class="invalid-feedback" th:errors="*{isbn}">Error</div>
-    </div>
+        <div class="mb-3">
+            <label class="form-label" for="isbn">ISBN</label>
+            <!-- readonly y no disabled: un campo disabled no se envía -->
+            <input class="form-control" th:classappend="${#fields.hasErrors('isbn')} ? 'is-invalid'" th:field="*{isbn}" th:readonly="*{edicion}"
+                   type="text">
+            <div class="invalid-feedback" th:errors="*{isbn}">Error</div>
+        </div>
 
-    <div class="mb-3">
-      <label for="titulo" class="form-label">Título</label>
-      <input type="text" th:field="*{titulo}" class="form-control"
-             th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid'">
-      <div class="invalid-feedback" th:errors="*{titulo}">Error</div>
-    </div>
+        <div class="mb-3">
+            <label class="form-label" for="titulo">Título</label>
+            <input class="form-control" th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid'" th:field="*{titulo}"
+                   type="text">
+            <div class="invalid-feedback" th:errors="*{titulo}">Error</div>
+        </div>
 
-    <div class="mb-3">
-      <label for="autorId" class="form-label">Autor</label>
-      <!-- Se envía el id del autor; se muestra su nombre -->
-      <select th:field="*{autorId}" class="form-select"
-              th:classappend="${#fields.hasErrors('autorId')} ? 'is-invalid'">
-        <option value="">-- Selecciona un autor --</option>
-        <option th:each="a : ${autores}"
-                th:value="${a.id}"
-                th:text="${a.nombre}">Autor</option>
-      </select>
-      <div class="invalid-feedback" th:errors="*{autorId}">Error</div>
-    </div>
+        <div class="mb-3">
+            <label class="form-label" for="autorId">Autor</label>
+            <!-- Se envía el id del autor; se muestra su nombre -->
+            <select class="form-select" th:classappend="${#fields.hasErrors('autorId')} ? 'is-invalid'"
+                    th:field="*{autorId}">
+                <option value="">-- Selecciona un autor --</option>
+                <option th:each="a : ${autores}"
+                        th:text="${a.nombre}"
+                        th:value="${a.id}">Autor
+                </option>
+            </select>
+            <div class="invalid-feedback" th:errors="*{autorId}">Error</div>
+        </div>
 
-    <div class="mb-4">
-      <label for="fechaPublicacion" class="form-label">Fecha de publicación</label>
-      <input type="date" th:field="*{fechaPublicacion}" class="form-control"
-             th:classappend="${#fields.hasErrors('fechaPublicacion')} ? 'is-invalid'">
-      <div class="invalid-feedback" th:errors="*{fechaPublicacion}">Error</div>
-    </div>
+        <div class="mb-4">
+            <label class="form-label" for="fechaPublicacion">Fecha de publicación</label>
+            <input class="form-control" th:classappend="${#fields.hasErrors('fechaPublicacion')} ? 'is-invalid'" th:field="*{fechaPublicacion}"
+                   type="date">
+            <div class="invalid-feedback" th:errors="*{fechaPublicacion}">Error</div>
+        </div>
 
-    <div class="d-flex gap-2">
-      <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
-      <a th:href="@{/libros}" class="btn btn-outline-secondary">Cancelar</a>
-    </div>
-  </form>
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> Guardar</button>
+            <a class="btn btn-outline-secondary" th:href="@{/libros}">Cancelar</a>
+        </div>
+    </form>
 </div>
 
 <th:block th:replace="~{fragments/layout :: scripts}"></th:block>

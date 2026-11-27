@@ -1,6 +1,8 @@
 package es.daw.bibliotecajdbcsecure.exception;
 
-/** Se pide un libro o un autor que no existe. */
+/**
+ * Se pide un libro o un autor que no existe.
+ */
 public class RecursoNoEncontradoException extends RuntimeException {
 
     public RecursoNoEncontradoException(String mensaje) {

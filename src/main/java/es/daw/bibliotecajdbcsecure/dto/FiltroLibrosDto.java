@@ -5,7 +5,9 @@ import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** Filtros del listado de libros. Todos son opcionales. */
+/**
+ * Filtros del listado de libros. Todos son opcionales.
+ */
 @Data
 @NoArgsConstructor
 public class FiltroLibrosDto {

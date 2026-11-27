@@ -29,7 +29,9 @@ public class LibroController {
     private final LibroMapper libroMapper;
     private final AutorMapper autorMapper;
 
-    /** Disponible en todas las vistas de este controlador, también al volver con errores. */
+    /**
+     * Disponible en todas las vistas de este controlador, también al volver con errores.
+     */
     @ModelAttribute("autores")
     public List<AutorDto> autores() {
         return autorService.listar().stream()

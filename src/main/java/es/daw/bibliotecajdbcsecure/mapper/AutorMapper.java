@@ -4,7 +4,9 @@ import es.daw.bibliotecajdbcsecure.dto.AutorDto;
 import es.daw.bibliotecajdbcsecure.model.Autor;
 import org.springframework.stereotype.Component;
 
-/** Convierte entre AutorDto y Autor. Solo convierte: no usa servicios ni repositorios. */
+/**
+ * Convierte entre AutorDto y Autor. Solo convierte: no usa servicios ni repositorios.
+ */
 @Component
 public class AutorMapper {
 

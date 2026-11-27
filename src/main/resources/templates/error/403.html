@@ -10,7 +10,7 @@
     <p class="lead">
         No tienes permiso para acceder a <code th:text="${path}">/ruta</code>
     </p>
-    <a th:href="@{/libros}" class="btn btn-primary">Volver a los libros</a>
+    <a class="btn btn-primary" th:href="@{/libros}">Volver a los libros</a>
 </div>
 
 <th:block th:replace="~{fragments/layout :: scripts}"></th:block>

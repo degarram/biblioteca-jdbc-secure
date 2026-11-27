@@ -1,63 +1,63 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <!-- Fragmento 1: <head> común. Recibe el título de la página -->
 <head th:fragment="head(titulo)">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title th:text="${titulo} + ' · Biblioteca'">Biblioteca</title>
-  <!-- Ficheros locales: la aplicación funciona sin internet -->
-  <link rel="stylesheet" th:href="@{/vendor/bootstrap/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.min.css}">
-  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title th:text="${titulo} + ' · Biblioteca'">Biblioteca</title>
+    <!-- Ficheros locales: la aplicación funciona sin internet -->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 
 <body>
 
 <!-- Fragmento 2: barra de navegación -->
-<nav th:fragment="navbar" class="navbar navbar-expand navbar-dark bg-dark mb-4">
-  <div class="container">
-    <a class="navbar-brand fw-bold" th:href="@{/}"><i class="bi bi-book"></i> Biblioteca</a>
-    <div class="navbar-nav">
-      <a class="nav-link" th:href="@{/libros}">Libros</a>
-      <a class="nav-link" th:href="@{/autores}">Autores</a>
-    </div>
-    <!-- Usuario identificado: nombre, rol y botón de salir -->
-    <div sec:authorize="isAuthenticated()" class="ms-auto d-flex align-items-center gap-3">
+<nav class="navbar navbar-expand navbar-dark bg-dark mb-4" th:fragment="navbar">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}"><i class="bi bi-book"></i> Biblioteca</a>
+        <div class="navbar-nav">
+            <a class="nav-link" th:href="@{/libros}">Libros</a>
+            <a class="nav-link" th:href="@{/autores}">Autores</a>
+        </div>
+        <!-- Usuario identificado: nombre, rol y botón de salir -->
+        <div class="ms-auto d-flex align-items-center gap-3" sec:authorize="isAuthenticated()">
   <span class="navbar-text">
     <i class="bi bi-person-circle"></i> <span sec:authentication="name">usuario</span>
-    <span sec:authorize="hasRole('ADMIN')" class="badge bg-warning text-dark">ADMIN</span>
+    <span class="badge bg-warning text-dark" sec:authorize="hasRole('ADMIN')">ADMIN</span>
   </span>
-      <!-- Logout por POST: así lo protege el token CSRF -->
-      <form th:action="@{/logout}" method="post" class="m-0">
-        <button type="submit" class="btn btn-outline-light btn-sm">
-          <i class="bi bi-box-arrow-right"></i> Salir
-        </button>
-      </form>
-    </div>
+            <!-- Logout por POST: así lo protege el token CSRF -->
+            <form class="m-0" method="post" th:action="@{/logout}">
+                <button class="btn btn-outline-light btn-sm" type="submit">
+                    <i class="bi bi-box-arrow-right"></i> Salir
+                </button>
+            </form>
+        </div>
 
-    <!-- Anónimo: enlace al login -->
-    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-light btn-sm ms-auto">
-      <i class="bi bi-box-arrow-in-right"></i> Entrar
-    </a>
-  </div>
+        <!-- Anónimo: enlace al login -->
+        <a class="btn btn-outline-light btn-sm ms-auto" sec:authorize="!isAuthenticated()" th:href="@{/login}">
+            <i class="bi bi-box-arrow-in-right"></i> Entrar
+        </a>
+    </div>
 </nav>
 
 <!-- Fragmento 3: mensajes flash (éxito / error) tras un redirect -->
 <div th:fragment="alertas">
-  <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show">
-    <i class="bi bi-check-circle"></i> <span th:text="${mensaje}">Mensaje</span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  </div>
-  <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
-    <i class="bi bi-exclamation-triangle"></i> <span th:text="${error}">Error</span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  </div>
+    <div class="alert alert-success alert-dismissible fade show" th:if="${mensaje}">
+        <i class="bi bi-check-circle"></i> <span th:text="${mensaje}">Mensaje</span>
+        <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" th:if="${error}">
+        <i class="bi bi-exclamation-triangle"></i> <span th:text="${error}">Error</span>
+        <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+    </div>
 </div>
 
 <!-- Fragmento 4: scripts al final del body -->
 <th:block th:fragment="scripts">
-  <script th:src="@{/vendor/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/bootstrap.bundle.min.js}"></script>
 </th:block>
 
 </body>

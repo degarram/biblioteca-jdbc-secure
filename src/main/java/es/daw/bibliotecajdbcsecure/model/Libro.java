@@ -9,12 +9,12 @@ import java.time.LocalDate;
 
 /**
  * Fila de la tabla LIBRO.
- *
+ * <p>
  * - id: clave técnica. Se usa internamente y no se publica.
  * - isbn: clave de negocio. Es lo que ve el usuario y lo que viaja en las URL.
  * - autor: objeto completo, no el INT de la columna autor_id.
  * - fechaPublicacion: LocalDate, una fecha sin hora ni zona horaria,
- *   que es el equivalente en Java al tipo DATE de la base de datos.
+ * que es el equivalente en Java al tipo DATE de la base de datos.
  */
 @Data
 @Builder
